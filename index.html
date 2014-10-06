@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Angular-layout : Base html full-page layout directives inspired by Adobe Flex, using CSS flexbox">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Angular-layout</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/mmouterde/angular-layout">View on GitHub</a>
+
+          <h1 id="project_title">Angular-layout</h1>
+          <h2 id="project_tagline">Base html full-page layout directives inspired by Adobe Flex, using CSS flexbox</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/mmouterde/angular-layout/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/mmouterde/angular-layout/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a name="angular-layout" class="anchor" href="#angular-layout"><span class="octicon octicon-link"></span></a>Angular Layout</h1>
+
+<p>Angular Layout is a collection of directives written in <a href="http://angularjs.org/">angular</a>, to
+simplify building of full-page layouts. It is inspired by Apache Flex (formerly
+Adobe Flex) and Java Swing way of defining layout by means of declarative xml elements and
+related attributes.</p>
+
+<p>This library, although very simple, is experimental and has not yet been tested
+extensively. Please provide feedback if you notice a bug or misbehavior, and,
+anyway, <strong>use at your own peril.</strong></p>
+
+<h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>The easiest way to install Angular Layout is using <a href="http://bower.io/">bower</a>.</p>
+
+<pre><code>bower install --save angular-layout
+</code></pre>
+
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>Add the module <code>angular.layout</code> to your application dependencies, like so:</p>
+
+<pre><code>angular.module('myApp', ['angular.layout', ...])
+</code></pre>
+
+<p>Don't forget to refer angular-layout.js and angular-layout.css in your html
+pages, like so:</p>
+
+<pre><code>&lt;script src="angular-layout.js"&gt;&lt;/script&gt;
+&lt;link rel="stylesheet" href="angular-layout.css"/&gt;
+</code></pre>
+
+<p>You may use minified resource versions respectively angular-layout.min.js and angular-layout.min.css.
+Look at the <a href="https://github.com/demerzel3/angular-layout/tree/master/demos">demos</a> for some usage examples.</p>
+
+<p>Once angular-layout module is loaded you can use following directives :</p>
+
+<h3>
+<a name="vbox--hbox" class="anchor" href="#vbox--hbox"><span class="octicon octicon-link"></span></a>vbox / hbox</h3>
+
+<p>Added as attribute in a container such as div, body, td... These directives make the container a Flex container.</p>
+
+<ul>
+<li>
+<code>hbox</code> to align child horizontally</li>
+<li>
+<code>vbox</code> to align child vertically</li>
+</ul><h3>
+<a name="container-attributes" class="anchor" href="#container-attributes"><span class="octicon octicon-link"></span></a>container attributes</h3>
+
+<p>Other attributes could be added to organize child fine :</p>
+
+<ul>
+<li><p><code>justify</code> could be set to <code>center</code>, <code>flex-end</code>, <code>flex-start</code> (default value), <code>space-around</code>, <code>space-between</code>.
+As the justify in text document layout, this attribute defines where the child group should be placed if there is more space than needed.</p></li>
+<li><p><code>align</code> could be set to <code>baseline</code>, <code>center</code>, <code>flex-end</code>, <code>flex-start</code>, <code>stretch</code> (default value).
+This attribute define on which criteria child should be aligned each other.</p></li>
+<li><p><code>x-justify</code> could be set to <code>center</code>, <code>flex-end</code>, <code>flex-start</code> (default value).
+This attribute defines where the child group should be placed if there is more space than needed ON THE CROSS AXIS (ie vertically for <code>hbox</code>, horizontally for <code>vbox</code>)</p></li>
+<li><p><code>wrap</code> could be set to <code>nowrap</code> (default value), <code>wrap</code>, <code>wrap-reverse</code>.
+This attribute define the wrap policy.</p></li>
+</ul><p>Note that you can use hbox and vbox as elements to</p>
+
+<pre><code>&lt;vbox&gt;&lt;/vbox&gt;
+&lt;!-- is a short for (due to css default values)--&gt;
+&lt;div vbox justify="flex-start" align="stretch" x-justify="flex-start" wrap="nowrap"&gt;&lt;/div&gt;
+</code></pre>
+
+<h3>
+<a name="child-attributes" class="anchor" href="#child-attributes"><span class="octicon octicon-link"></span></a>child attributes</h3>
+
+<ul>
+<li>
+<code>grow</code> : the ability to take more place if possible. Valued with an integer, the value is use as a relative ability (big grow will grow quicker and more)</li>
+<li>
+<code>shrink</code> : the ability to take less place if required. Valued with an integer, the value is use as a relative ability (big shrink will shrink quicker and more)</li>
+<li>
+<code>order</code> : the index position among other child.</li>
+</ul><h3>
+<a name="responsive-extension" class="anchor" href="#responsive-extension"><span class="octicon octicon-link"></span></a>responsive extension</h3>
+
+<p>As well as bootstrap 3, the layout could be responsively defined with angular-layout.
+Angular-Layout provide four <em>extension</em> to its all directives (vbox, hbox, grow, shrink, order) : <code>*-xs</code>, <code>*-sm</code>, <code>*-md</code>, <code>*-lg</code>.
+Just add this extension to directives and restrict the directive to the associated media.
+Used in conjonction with bootstrap <code>hidden-xs</code> or <code>visible-xs</code>... You can create responsive application easily.</p>
+
+<pre><code>&lt;!-- So you can define a `vbox` that become a `hbox` on a small media by this way --&gt;
+&lt;vbox hbox-sm&gt;&lt;/vbox&gt;
+
+&lt;!-- or reorder an item as first element on extra small media : --&gt;
+&lt;div vbox order-xs="0"&gt;&lt;/div&gt;
+</code></pre>
+
+<h2>
+<a name="how-it-works" class="anchor" href="#how-it-works"><span class="octicon octicon-link"></span></a>How it works</h2>
+
+<p>All the layouting is done via CSS, that is: no Javascript is involved in the
+layouting, so it is super-fast and lightweight.</p>
+
+<p>Note that directives are here to help, but css would be enough.
+Directive do not always use CSS name. By experience, <code>align-items</code>, <code>align-content</code> and <code>justify</code> are very confusing !
+So directive allows you to use (I hope) easy to understand name : <code>align</code>, <code>justify</code>, <code>x-justify</code> (x for cross axis).
+However, values for properties are the same.</p>
+
+<p>Angular Layout is built on top of Flexbox and aims to make it easier for angular developers to leverage
+its power and flexibility. Read more about Flexbox <a href="http://css-tricks.com/snippets/css/a-guide-to-flexbox/">here</a>.</p>
+
+<h2>
+<a name="browser-support" class="anchor" href="#browser-support"><span class="octicon octicon-link"></span></a>Browser support</h2>
+
+<p>The main target of this library are mobile devices and modern browsers, old
+versions of IE are not taken into account at the current stage of development.
+CSS flex relative properties are supported on all recent browsers : <a href="http://caniuse.com/#feat=flexbox">Check that !</a></p>
+
+<h2>
+<a name="v010-breaking-changes" class="anchor" href="#v010-breaking-changes"><span class="octicon octicon-link"></span></a>v0.1.0 Breaking changes</h2>
+
+<ul>
+<li>no more scroll</li>
+<li>no more padding</li>
+<li>attribute name changed to fit new spec ! (now : grow,shrink,align,justify,x-justify,vbox,hbox and responsible versions)</li>
+<li>module name changed to <code>angular.layout</code> (ng is reserved by convention to official modules)</li>
+</ul><h1>
+<a name="release-history" class="anchor" href="#release-history"><span class="octicon octicon-link"></span></a>Release History</h1>
+
+<ul>
+<li>2014-10-06       v0.1.0  upgrate to Angular 1.2.26, Flexbox <a href="http://www.w3.org/TR/2014/WD-css-flexbox-1-20140925/">pre RC on 25 September 2014 spec</a>. no dependencies. refactoring. autoprefixed.</li>
+<li>2013-09-16       v0.0.2  remove underscore, meteor dependencies</li>
+<li>2013-09-15       v0.0.1  using Angular 1.1.5 Bootstrap 3, Flexbox 1999 spec</li>
+</ul>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Angular-layout maintained by <a href="https://github.com/mmouterde">mmouterde</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
